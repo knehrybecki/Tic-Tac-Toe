@@ -1,30 +1,13 @@
-import {createCombineWinner} from './createCombineWinner.js'
-import {createComputerMove} from './computerMove.js'
-
-export {
-    player,
-    computer,
-    combineWinner,
-    grids,
-    gameBox,
-    userSelection,
-    createCircle,
-    createCross,
-    createCombineWinner
-}
-
+import { createCombineWinner } from './createCombineWinner.js'
+import { createComputerMove } from './computerMove.js'
 
 const main = document.querySelector('.main')
 
-let gameBox = Array.from(new Array(9)).map(()=> '')
+export let gameBox = Array.from(new Array(9)).map(() => '')
 
-let userSelection = null
+export let userSelection = null
 
-let player = []
-
-let computer = []
-
-const combineWinner = [
+export const combineWinner = [
     [0,1,2],
     [3,4,5],
     [6,7,8],
@@ -63,7 +46,6 @@ buttonCircle.classList.add('selected__button-circle')
 buttonCircle.setAttribute("data-name","circle")
 selectedButton.appendChild(buttonCircle)
 
-
 const gameGrid = document.createElement('div')
 gameGrid.classList.add('game__grid')
 main.appendChild(gameGrid)
@@ -80,7 +62,7 @@ const createGameGrid = (index) => {
     grid.appendChild(gridBox)
 }
 
-const createCross = () => {
+export const createCross = () => {
     const cross = document.createElement('div')
     cross.classList.add('cross')
     buttonCross.appendChild(cross)
@@ -88,7 +70,7 @@ const createCross = () => {
     return cross
 }
 
-const createCircle = () => {
+export const createCircle = () => {
     const circle = document.createElement('div')
     circle.classList.add('circle')
     buttonCircle.appendChild(circle)
@@ -101,10 +83,9 @@ createCross()
 
 gameBox.forEach((item,index) => {createGameGrid(index)})
 
-const grids = document.querySelectorAll('.grid__box')
+export const grids = document.querySelectorAll('.grid__box')
 const cross = document.querySelector('.cross')
 const circle = document.querySelector('.circle')
-const mainGamee =document.querySelector('.main__game')
 
 buttonCross.addEventListener('click', () => {
     buttonCross.style.pointerEvents = 'none'
@@ -113,7 +94,7 @@ buttonCross.addEventListener('click', () => {
     circle.classList.remove('selection')
 
     userSelection = 'x'
-
+                                
     grids.forEach(item => item.style.pointerEvents = null)
 })
 
@@ -127,7 +108,6 @@ buttonCircle.addEventListener('click', () => {
 
     grids.forEach(item => item.style.pointerEvents = null)
 })
-
 
 const match = () => {  
     grids.forEach((item,index) => {
@@ -144,19 +124,9 @@ const match = () => {
 
             gameBox[index] = userSelection
 
-            player[player.length] = index
-
             createCombineWinner() 
 
-           grids.forEach(item => item.style.pointerEvents = 'none')
-
-           if (gameBox.filter(item => item == '').length === 0 ) {
-                setTimeout(() => {
-                    alert("Remis!")
-        
-                    window.location.reload()
-                }, 1000) 
-            } 
+           grids.forEach(item => item.style.pointerEvents = 'none')  
 
             setTimeout(() => {
                 createComputerMove(index)

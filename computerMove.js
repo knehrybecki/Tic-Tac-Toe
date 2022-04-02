@@ -1,16 +1,16 @@
-import {
+import { 
     gameBox,
     userSelection,
     grids,
-    computer,
     createCircle,
-    createCross,
-    createCombineWinner
-} from './script.js'
+    createCross
+ } from './script.js'
+ 
+import { createCombineWinner } from './createCombineWinner.js'
 
-export {createComputerMove}
+export let computerSelection = null
 
-const createComputerMove = () => {
+export const createComputerMove = () => {
     const freeSpots = gameBox
         .map((spot, index) => spot ? null : index)
         .filter(spot => spot !== null)
@@ -18,19 +18,18 @@ const createComputerMove = () => {
     const random = freeSpots[Math.floor(Math.random()* freeSpots.length)]
 
     if (userSelection === "o") {
-        grids[random].classList.add('computer')
-        
+        grids[random].classList.add('computer')       
         grids[random].appendChild(createCross())
         
         gameBox[grids[random].dataset.index] = "X"
-        computer[computer.length] = grids[random].dataset.index  
+        computerSelection = 'X'
     }      
     else {
         grids[random].classList.add('computer')
         grids[random].appendChild(createCircle())
 
         gameBox[grids[random].dataset.index] = "O"
-        computer[computer.length] = grids[random].dataset.index       
+        computerSelection = "O"
     }  
   
     createCombineWinner() 

@@ -31,6 +31,7 @@
     width: 50px
     height: 5px
     padding: 15px 0px 15px 0px
+    z-index: -1
 
 .cross:before,
 .cross:after
@@ -56,6 +57,7 @@
     height: 35px
     border: 5px solid #000
     border-radius: 50%
+    z-index: -1
 
 .circle:hover
     border-color: #fff
@@ -119,7 +121,6 @@
     transition: all 1s ease
 
 .line-horizontal
-    z-index: 999
     width: 0px
     height: 5px
     background: black
@@ -128,7 +129,6 @@
     animation: width 500ms linear both
 
 .line-vertical
-    z-index: 999
     width: 5px
     height: 0px
     background: black
@@ -141,13 +141,11 @@
     width: 400px
     height: 400px
     position: absolute
-    z-index: 999
 
 .cross-wise
-    z-index: 999
     stroke: #000
     stroke-dasharray: 410
-    stroke-width: 7
+    stroke-width: 6
     animation: skew 500ms linear both
     animation-fill-mode: forwards
     pointer-events: none
