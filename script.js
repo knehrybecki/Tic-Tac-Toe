@@ -20,41 +20,45 @@ export const combineWinner = [
     [2,4,6]
 ]
 
-const mainGame = document.createElement('div')
-mainGame.classList.add('main__game')
-mainGame.textContent = "Select Cross or Circle: "
-main.appendChild(mainGame)
+const renderGame = () => {
+    const mainGame = document.createElement('div')
+    mainGame.classList.add('main__game')
+    mainGame.textContent = "Select Cross or Circle: "
+    main.appendChild(mainGame)
+    
+    const game = document.createElement('div')
+    game.classList.add('game')
+    mainGame.appendChild(game)
+    
+    const gameSelectedItem = document.createElement('div')
+    gameSelectedItem.classList.add('game__selected-item')
+    game.appendChild(gameSelectedItem)
+    
+    const selectedButton = document.createElement('div')
+    selectedButton.classList.add('selected')
+    gameSelectedItem.appendChild(selectedButton)
+    
+    const buttonCross = document.createElement('div')
+    buttonCross.classList.add('selected__button-cross')
+    selectedButton.appendChild(buttonCross)
 
-const game = document.createElement('div')
-game.classList.add('game')
-mainGame.appendChild(game)
+    const buttonCircle = document.createElement('div')
+    buttonCircle.classList.add('selected__button-circle')
+    buttonCircle.setAttribute("data-name","circle")
+    selectedButton.appendChild(buttonCircle)
+    
+    const gameGrid = document.createElement('div')
+    gameGrid.classList.add('game__grid')
+    main.appendChild(gameGrid)
+    
+    const grid = document.createElement('div')
+    grid.classList.add('grid')
+    gameGrid.appendChild(grid)
+}
+renderGame()
 
-const gameSelectedItem = document.createElement('div')
-gameSelectedItem.classList.add('game__selected-item')
-game.appendChild(gameSelectedItem)
-
-const selectedButton = document.createElement('div')
-selectedButton.classList.add('selected')
-gameSelectedItem.appendChild(selectedButton)
-
-const buttonCross = document.createElement('div')
-buttonCross.classList.add('selected__button-cross')
-selectedButton.appendChild(buttonCross)
-
-const buttonCircle = document.createElement('div')
-buttonCircle.classList.add('selected__button-circle')
-buttonCircle.setAttribute("data-name","circle")
-selectedButton.appendChild(buttonCircle)
-
-const gameGrid = document.createElement('div')
-gameGrid.classList.add('game__grid')
-main.appendChild(gameGrid)
-
-const grid = document.createElement('div')
-grid.classList.add('grid')
-gameGrid.appendChild(grid)
-
-const createGameGrid = (index) => {
+const createGameGrid = index => {
+    const grid = document.querySelector('.grid')
     const gridBox = document.createElement('div')
     gridBox.setAttribute("data-index", index)
     gridBox.classList.add('grid__box')
@@ -65,7 +69,6 @@ const createGameGrid = (index) => {
 export const createCross = () => {
     const cross = document.createElement('div')
     cross.classList.add('cross')
-    buttonCross.appendChild(cross)
 
     return cross
 }
@@ -73,17 +76,20 @@ export const createCross = () => {
 export const createCircle = () => {
     const circle = document.createElement('div')
     circle.classList.add('circle')
-    buttonCircle.appendChild(circle)
 
     return circle
 }
 
-createCircle()
-createCross()
-
-gameBox.forEach((item,index) => {createGameGrid(index)})
+gameBox.forEach((item,index) => createGameGrid(index))
 
 export const grids = document.querySelectorAll('.grid__box')
+
+const buttonCross = document.querySelector('.selected__button-cross')
+const buttonCircle = document.querySelector('.selected__button-circle')
+
+buttonCross.appendChild(createCross())
+buttonCircle.appendChild(createCircle())
+
 const cross = document.querySelector('.cross')
 const circle = document.querySelector('.circle')
 
@@ -134,5 +140,4 @@ const match = () => {
         })
     })
 }
-
 match()
